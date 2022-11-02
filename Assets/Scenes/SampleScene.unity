@@ -179,7 +179,6 @@ MonoBehaviour:
   MinWalls: 5
   MaxWalls: 8
   DistanceBetweenWalls: 10
-  DistanceBetweenHealth: 15
   LastWall: {fileID: 957294355307147569, guid: 7fb7462e7d00d7c4db5a200800d0f5b2, type: 3}
 --- !u!43 &551086791
 Mesh:
@@ -1392,7 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb982f221a7bb434087192c895baef13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SnakeSpeed: 6
+  SnakeSpeed: 10
   Sensitivity: 50
   Game: {fileID: 2010350164}
 --- !u!135 &1161595714
@@ -1437,6 +1436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SnakeHead: {fileID: 2119847536}
+  positions: []
   SphereDiameter: 1
 --- !u!114 &1161595717
 MonoBehaviour:
