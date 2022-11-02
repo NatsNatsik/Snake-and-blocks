@@ -8,7 +8,7 @@ public class Tail : MonoBehaviour
     public Transform SnakeHead;
 
     private List<Transform> SnakeSpheres = new List<Transform>();
-    private List<Vector3> positions = new List<Vector3>();
+    public List<Vector3> positions = new List<Vector3>();
 
     public float SphereDiameter;
    
@@ -40,8 +40,11 @@ public class Tail : MonoBehaviour
 
     public void AddSphere()
     {
+        if(positions.Count < 1)
+        {
+            return;
+        }
         Vector3 position = new Vector3(positions[positions.Count - 1].x, positions[positions.Count - 1].y, positions[positions.Count - 1].z - SphereDiameter);
-        //Transform Spheres = Instantiate(SnakeHead, positions[positions.Count - 1], Quaternion.identity, transform);
         Transform Spheres = Instantiate(SnakeHead, position, Quaternion.identity, transform);
         SnakeSpheres.Add(Spheres);
         positions.Add(Spheres.position);
@@ -49,10 +52,14 @@ public class Tail : MonoBehaviour
 
     public void RemoveSphere()
     {
-        Destroy(SnakeHead.gameObject);
-        SnakeHead = SnakeSpheres[0];
+        //Destroy(SnakeHead.gameObject);
+        //SnakeHead = SnakeSpheres[0];
+        //SnakeHead.position = positions[0];
+        //SnakeSpheres.RemoveAt(0);
+        //positions.RemoveAt(1);
+
+        Destroy(SnakeSpheres[0].gameObject);
         SnakeSpheres.RemoveAt(0);
-        positions[0] = positions[1];
         positions.RemoveAt(1);
     }
 

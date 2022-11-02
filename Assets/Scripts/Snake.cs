@@ -16,6 +16,9 @@ public class Snake : MonoBehaviour
     private Material material;
     private bool die = false;
 
+    List<GameObject> tail;
+    GameObject head;
+
     private void Start()
     {
         snakeTail = GetComponent<Tail>();
@@ -23,6 +26,8 @@ public class Snake : MonoBehaviour
         for (int i = 0; i < Length; i++)
         {
             snakeTail.AddSphere();
+            var collider = GetComponent<Collider>();
+            collider.transform.SetPositionAndRotation(snakeTail.SnakeHead.position, Quaternion.identity);
         }
         PointsText.SetText(Length.ToString());
     }
@@ -49,6 +54,11 @@ public class Snake : MonoBehaviour
         Length--;
         PointsText.SetText(Length.ToString());
         snakeTail.RemoveSphere();
+        transform.position = Vector3.Lerp(transform.position, snakeTail.positions[1], snakeTail.SphereDiameter/4);
+        //transform.position -= new Vector3(0, 0, snakeTail.SphereDiameter);
+        var collider = GetComponent<SphereCollider>();
+        //collider.center -= new Vector3(0,0, snakeTail.SphereDiameter);
+
         if (Length == 0)
         {
             Die();
