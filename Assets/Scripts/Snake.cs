@@ -49,6 +49,16 @@ public class Snake : MonoBehaviour
 
     }
 
+    public void AddLength(int length)
+    {
+        for(int i = 0; i < length; i++)
+        {
+            Length++;
+            snakeTail.AddSphere();
+            PointsText.SetText(Length.ToString());
+        }
+    }
+
     public void removeHead()
     {
         Length--;
@@ -58,7 +68,6 @@ public class Snake : MonoBehaviour
         //transform.position -= new Vector3(0, 0, snakeTail.SphereDiameter);
         var collider = GetComponent<SphereCollider>();
         //collider.center -= new Vector3(0,0, snakeTail.SphereDiameter);
-
         if (Length == 0)
         {
             Die();

@@ -11,8 +11,8 @@ public class Tail : MonoBehaviour
     public List<Vector3> positions = new List<Vector3>();
 
     public float SphereDiameter;
-   
-    void Start()
+
+    private void Awake()
     {
         positions.Add(SnakeHead.position);
     }
