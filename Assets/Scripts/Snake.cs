@@ -13,15 +13,11 @@ public class Snake : MonoBehaviour
     public TextMeshPro PointsText;
     private Tail snakeTail;
 
-    private Material material;
-    private bool die = false;
-
-    List<GameObject> tail;
-    GameObject head;
+    private bool die = false;   
 
     private void Start()
     {
-        snakeTail = GetComponent<Tail>();
+       snakeTail = GetComponent<Tail>();
 
         for (int i = 0; i < Length; i++)
         {
@@ -64,12 +60,10 @@ public class Snake : MonoBehaviour
         Length--;
         PointsText.SetText(Length.ToString());
         snakeTail.RemoveSphere();
-        transform.position = Vector3.Lerp(transform.position, snakeTail.positions[1], snakeTail.SphereDiameter/4);
-        //transform.position -= new Vector3(0, 0, snakeTail.SphereDiameter);
-        var collider = GetComponent<SphereCollider>();
-        //collider.center -= new Vector3(0,0, snakeTail.SphereDiameter);
-        if (Length == 0)
+        transform.position = Vector3.Lerp(transform.position, snakeTail.positions[1], snakeTail.SphereDiameter/2);
+        if (Length < 1)
         {
+            Length = 0;
             Die();
         }
     }
@@ -79,6 +73,7 @@ public class Snake : MonoBehaviour
         if (collision.collider.TryGetComponent(out Cube cube))
         {
             removeHead();
+           
         }
     }
 
@@ -91,6 +86,7 @@ public class Snake : MonoBehaviour
    
     public void Die()
     {
+         die = true;
         _rb.velocity = Vector3.zero;
         Game.OnPlayerDied();
     }

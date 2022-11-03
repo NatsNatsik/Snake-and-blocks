@@ -18,6 +18,8 @@ public class Cube : MonoBehaviour
     [SerializeField]
     bool loop = false;
 
+    public AudioSource BreakWallAudio;
+
     void Start()
     {
         _renderer = gameObject.GetComponent<Renderer>();
@@ -39,13 +41,16 @@ public class Cube : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.TryGetComponent(out Snake snakeHead))
+
+        if (collision.collider.TryGetComponent(out Snake snakeHead))    
         {
+            BreakWallAudio.Play();
             score--;
             textScore.SetText(score.ToString());
+           
             if(score == 0)
             {
-                Destroy(gameObject);
+               Destroy(gameObject);
             }
         }
     }

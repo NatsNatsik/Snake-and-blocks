@@ -1,9 +1,14 @@
 using Assets.Scripts;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+    public static bool GameOver;
+    public static bool LevelCompleted;
+    public GameObject GameOverPanel;
+    public GameObject LevelCompletedPanel;
 
     public MovementSnake MovementSnake;
     public enum State
@@ -17,22 +22,56 @@ public class Game : MonoBehaviour
 
     public void OnPlayerDied()
     {
-        if (CarrentState != State.Playing) return;
-
-        CarrentState = State.Loss;
+       
+        GameOverPanel.SetActive(true);
+        GameOver = true;
         MovementSnake.enabled = false;
-        Debug.Log("Game Over");
-        {
-
-        }
     }
 
     public void OnPlayerReachedFinish()
     {
-        if (CarrentState != State.Playing) return;
-        CarrentState = State.Won;
+        LevelCompletedPanel.SetActive(true);
+        LevelCompleted = true;
+        LevelIndex++;
         MovementSnake.enabled = false;
-        Debug.Log("You won!");
+      
+
+    }
+
+    public int LevelIndex
+    {
+        get => PlayerPrefs.GetInt("LevelIndex", 0);
+        private set
+        {
+            PlayerPrefs.SetInt("LevelIndex", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+
+    private void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void Start()
+    {
+       
+        LevelCompleted = false;
+        GameOver = false;
+        CarrentState = State.Playing;
+        Time.timeScale = 1;
+    }
+    void Update()
+    {
+        if ((LevelCompleted && LevelCompletedPanel.active == true) ||
+            (GameOver && GameOverPanel.active == true))
+            if (Input.GetMouseButton(0) & GameOverPanel == true)
+            {
+                //SceneManager.LoadScene(0);
+                ReloadLevel();
+
+            }
 
     }
 }

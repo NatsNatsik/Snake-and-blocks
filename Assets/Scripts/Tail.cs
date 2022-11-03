@@ -52,15 +52,12 @@ public class Tail : MonoBehaviour
 
     public void RemoveSphere()
     {
-        //Destroy(SnakeHead.gameObject);
-        //SnakeHead = SnakeSpheres[0];
-        //SnakeHead.position = positions[0];
-        //SnakeSpheres.RemoveAt(0);
-        //positions.RemoveAt(1);
-
-        Destroy(SnakeSpheres[0].gameObject);
-        SnakeSpheres.RemoveAt(0);
-        positions.RemoveAt(1);
+        if (SnakeSpheres.Count > 1)
+        {
+            Destroy(SnakeSpheres[0].gameObject);
+            SnakeSpheres.RemoveAt(0);
+            positions.RemoveAt(1);
+        }
     }
 
 }
