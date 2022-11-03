@@ -9,20 +9,25 @@ public class GeneratorLevel : MonoBehaviour
     public int MaxWalls;
     public float DistanceBetweenWalls;
 
-    public Transform LastWall;
+    public Transform FirstWall;
 
 
     private void Awake()
     {
         int wallsCount = Random.Range(MinWalls, MaxWalls + 1);
+        Debug.Log(wallsCount);
 
-        for(int i = 0; i < wallsCount; i++)
+        FirstWall.localPosition = new Vector3(0, 0, 0);
+        Vector3 previousWallPosition = FirstWall.position;
+
+        for (int i = 0; i < wallsCount; i++)
         {
+            Debug.Log($"Wall {i}");
             int prefabIndex = Random.Range(0, WallPrefabs.Length);
-            GameObject Wall = Instantiate(WallPrefabs[prefabIndex], transform);
-            Wall.transform.localPosition = CalculatePosition(i);
+            Vector3 wallPosition = previousWallPosition + Vector3.forward * DistanceBetweenWalls;
+            GameObject Wall = Instantiate(WallPrefabs[prefabIndex], wallPosition, Quaternion.identity);
+            previousWallPosition = wallPosition;
         }
-        LastWall.localPosition = CalculatePosition(wallsCount);
        
         for (int i = 0; i < wallsCount; i++)
         {

@@ -18,6 +18,8 @@ public class Game : MonoBehaviour
         Loss
     }
 
+    private const int InitSnameLength = 5;
+
     public State CarrentState { get; private set; }
 
     public void OnPlayerDied()
@@ -26,6 +28,7 @@ public class Game : MonoBehaviour
         GameOverPanel.SetActive(true);
         GameOver = true;
         MovementSnake.enabled = false;
+        SnakeLenght = InitSnameLength;
     }
 
     public void OnPlayerReachedFinish()
@@ -34,8 +37,6 @@ public class Game : MonoBehaviour
         LevelCompleted = true;
         LevelIndex++;
         MovementSnake.enabled = false;
-      
-
     }
 
     public int LevelIndex
@@ -48,6 +49,19 @@ public class Game : MonoBehaviour
         }
     }
 
+    public int SnakeLenght
+    {
+        get => PlayerPrefs.GetInt("SnakeLenght", 0);
+        set
+        {
+            if (value < 1000)
+            {
+                PlayerPrefs.SetInt("SnakeLenght", value);
+                PlayerPrefs.Save();
+            }
+        }
+    }
+
 
     private void ReloadLevel()
     {
@@ -56,7 +70,6 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-       
         LevelCompleted = false;
         GameOver = false;
         CarrentState = State.Playing;
@@ -70,7 +83,6 @@ public class Game : MonoBehaviour
             {
                 //SceneManager.LoadScene(0);
                 ReloadLevel();
-
             }
 
     }
