@@ -179,7 +179,7 @@ MonoBehaviour:
   MinWalls: 5
   MaxWalls: 7
   DistanceBetweenWalls: 10
-  LastWall: {fileID: 957294355307147569, guid: 7fb7462e7d00d7c4db5a200800d0f5b2, type: 3}
+  FirstWall: {fileID: 957294355307147569, guid: 7fb7462e7d00d7c4db5a200800d0f5b2, type: 3}
 --- !u!1 &176876607
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35022
+  m_Name: pb_Mesh33114
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -873,7 +873,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34992
+  m_Name: pb_Mesh33082
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
