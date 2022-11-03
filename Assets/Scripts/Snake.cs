@@ -13,11 +13,13 @@ public class Snake : MonoBehaviour
     public TextMeshPro PointsText;
     private Tail snakeTail;
 
-    private bool die = false;
-
     private void Start()
     {
         Length = PlayerPrefs.GetInt("SnakeLenght");
+        if (Length == 0)
+        {
+            Length = Game.InitSnameLength;
+        }
 
         snakeTail = GetComponent<Tail>();
 
@@ -89,7 +91,6 @@ public class Snake : MonoBehaviour
    
     public void Die()
     {
-         die = true;
         _rb.velocity = Vector3.zero;
         Game.OnPlayerDied();
     }

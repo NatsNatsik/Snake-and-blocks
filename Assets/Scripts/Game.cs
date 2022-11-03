@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
         Loss
     }
 
-    private const int InitSnameLength = 5;
+    public const int InitSnameLength = 5;
 
     public State CarrentState { get; private set; }
 
